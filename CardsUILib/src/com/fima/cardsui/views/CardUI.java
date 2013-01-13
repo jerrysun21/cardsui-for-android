@@ -67,6 +67,8 @@ public class CardUI extends FrameLayout {
 	protected int mScrollY;
 	private StackAdapter mAdapter;
 	private View mHeader;
+	
+	private int mSelectedCards;
 
 	/**
 	 * Constructor
@@ -87,6 +89,7 @@ public class CardUI extends FrameLayout {
 		mColumnNumber = attrs.getAttributeIntValue(null, "columnCount", 1);
 		initData(context);
 	}
+	
 
 	/**
 	 * Constructor
@@ -369,6 +372,25 @@ public class CardUI extends FrameLayout {
 
 	public void setOnRenderedListener(OnRenderedListener onRenderedListener) {
 		this.onRenderedListener = onRenderedListener;
+	}
+	
+	public int getSelectedCards() {
+		return mSelectedCards;
+	}
+
+	public void addSelectedCards() {
+		this.mSelectedCards++;
+	}
+	public void removeSelectedCards() {
+		this.mSelectedCards--;
+	}
+	
+	public ArrayList<Card> getCards() {
+		ArrayList<Card> cardList = new ArrayList<Card>();
+		for (int i = 0; i < mStacks.size(); i++) {
+			cardList.add((Card)((CardStack)mStacks.get(i)).getCard(0));
+		}
+		return cardList;
 	}
 
 }
